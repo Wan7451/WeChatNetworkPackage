@@ -1,0 +1,6 @@
+button{
+  width: 100%;
+  background-color: blue;
+  color: white;
+  margin: 30rpx 30rpx;
+}
