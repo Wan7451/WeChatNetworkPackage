@@ -108,9 +108,9 @@ function handleRequest() {
       }
 
     },
-    fail: function ({ errMsg }) {
+    fail: function (res) {
       if (DEBUG) {
-        console.log("======>error:" + errMsg);
+        console.log("======>error:" + res.errMsg);
       }
       if (req.repeatCount < REPEAT_COUNT) {
         //加入队列再次请求，最多3次
@@ -121,15 +121,12 @@ function handleRequest() {
         return;
       }
       if (isHostMethod(req, "fail")) {
-        req.fail(errMsg);
+        req.fail(res.errMsg);
       }
 
       req.isLoding = false;
       wx.hideLoading();
-      if (!errMsg) {
-        return;
-      }
-      showErrorToast(errMsg);
+      showErrorToast(res.errMsg);
     }
 
   })
